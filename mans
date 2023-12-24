@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+usage() {
+cat <<EOF
+Name: mans
+Description: This script outputs a command description or an option description from the man page.
+Usage:
+	mans wget -b : Show wget -b option description
+	mans ls: Show the ls command description
+EOF
+}
+
+if (( $# == 0 ))
+then
+	usage
+	exit 1
+fi
+
+PROG="$1"
+
+if (( $# == 2 ))
+then
+	OPT="$2"
+	man "${PROG}" | col -bx | sed -n "/^ *${OPT}/,/^$/p" | grep --color=always -A50 -e "^ *${OPT}" -e "^ *${OPT},.*" -e "^ *-.*, ${OPT}" | sed -En '/^$/q;p'
+else
+	man "${PROG}" | col -bx | sed -n "/^DESCRIPTION/,/^$/p"
+fi
+
+exit 0
