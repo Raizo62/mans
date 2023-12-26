@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+SIZE_CONTEXT=50
+
 usage() {
 cat <<EOF
 Name: mans
@@ -21,7 +23,7 @@ PROG="$1"
 if (( $# == 2 ))
 then
 	OPT="$2"
-	man "${PROG}" | col -bx | sed -n "/^ *${OPT}/,/^$/p" | grep --color=always -A50 -e "^ *${OPT}" -e "^ *${OPT},.*" -e "^ *-.*, ${OPT}" | sed -En '/^$/q;p'
+	man "${PROG}" | col -bx | sed -n "/^ *${OPT}/,/^$/p" | grep --color=always -A"${SIZE_CONTEXT}" -e "^ *${OPT}" -e "^ *${OPT},.*" -e "^ *-.*, ${OPT}" | sed -En '/^$/q;p'
 else
 	man "${PROG}" | col -bx | sed -n "/^DESCRIPTION/,/^$/p"
 fi
