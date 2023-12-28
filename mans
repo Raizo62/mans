@@ -20,6 +20,12 @@ fi
 
 PROG="$1"
 
+if ! man "${PROG}" > /dev/null 2>&1
+then
+	echo "unknown man page: ${PROG}" >&2
+	exit 2
+fi
+
 if (( $# == 2 ))
 then
 	OPT="$2"
