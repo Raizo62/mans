@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# VERSION : 1
+
 SIZE_CONTEXT=50
 
 usage() {
