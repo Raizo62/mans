@@ -31,9 +31,9 @@ fi
 if (( $# == 2 ))
 then
 	OPT="$2"
-	man "${PROG}" | col -bx | sed -n "/^ *${OPT}/,/^$/p" | grep --color=always -A"${SIZE_CONTEXT}" -e "^ *${OPT}" -e "^ *${OPT},.*" -e "^ *-.*, ${OPT}" | sed -En '/^$/q;p'
+	man "${PROG}" 2> /dev/null | col -bx | sed -n "/^ *${OPT}/,/^$/p" | grep --color=always -A"${SIZE_CONTEXT}" -e "^ *${OPT}" -e "^ *${OPT},.*" -e "^ *-.*, ${OPT}" | sed -En '/^$/q;p'
 else
-	man "${PROG}" | col -bx | sed -n "/^DESCRIPTION/,/^$/p"
+	man "${PROG}" 2> /dev/null | col -bx | sed -n "/^DESCRIPTION/,/^$/p"
 fi
 
 exit 0
